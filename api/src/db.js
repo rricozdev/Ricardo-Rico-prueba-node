@@ -26,23 +26,25 @@ ModelCategoria(sequelize);
 ModelProducto(sequelize);
 ModelPedido(sequelize);
 ModelPromocion(sequelize);
+ModelTienda(sequelize);
+
+//  Enrollments
 ModelPedido_Producto(sequelize);
 ModelProducto_Categoria(sequelize);
 ModelProducto_Stock(sequelize);
 ModelTienda_Promocion(sequelize);
-ModelTienda(sequelize);
 
 
 const {
     Categoria,
-    Pedido_Producto,
     Pedido,
-    Producto_Categoria,
-    Producto_Stock,
     Producto,
-    Promocion,
-    Tienda_Promocion,
     Tienda,
+    Promocion,
+    Producto_Stock,
+    Producto_Categoria,
+    Pedido_Producto,
+    Tienda_Promocion,
   } = sequelize.models;
 
 // Definimos las relaciones entre los modelos
@@ -52,8 +54,8 @@ Producto.belongsToMany(Categoria, { through: Producto_Categoria });
 Categoria.belongsToMany(Producto, { through: Producto_Categoria });
 
 // Relación entere Producto y Producto_Stock(1:N)
-Producto.hasMany(Producto_Stock);
-Producto_Stock.belongsTo(Producto);
+Producto.hasMany(Producto_Stock, { foreignKey: "id_producto"});
+Producto_Stock.belongsTo(Producto, { foreignKey: "id_producto"});
 
 // Relación entre Pedido y Pedido_Producto (1:N)
 Pedido.hasMany(Pedido_Producto);
@@ -68,6 +70,9 @@ Promocion.belongsToMany(Tienda, { through: Tienda_Promocion });
 Tienda.belongsToMany(Promocion, { through: Tienda_Promocion });
 
 
+// Relación entre Producto_Stock y Tienda (N:1)
+Producto_Stock.belongsTo(Tienda, { foreignKey: "id_tienda" });
+Tienda.hasMany(Producto_Stock, { foreignKey: "id_tienda" });
 
 
 
