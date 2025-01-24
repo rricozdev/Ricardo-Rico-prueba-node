@@ -7,10 +7,10 @@ const routerProductos = Router(); // Creamos una instancia del enrutador para pr
 // CRUD
 
 // Post - Ruta para crear productos.
-routerProductos.post("/productos",validateProducto, createProductoHandler);
+routerProductos.post("/",validateProducto, createProductoHandler);
 
 // Get  - Ruta para obtener productos.
-routerProductos.get("/productos" , getAllProductosHandler);
+routerProductos.get("/" , getAllProductosHandler);
 
 
 // Exportamos el enrutador para usarlo en el enrutador principal o en otros módulos.
