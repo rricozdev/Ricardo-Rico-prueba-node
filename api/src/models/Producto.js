@@ -3,16 +3,16 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("Producto", {
         id: {
-            type: DataTypes.INTEGER.UNSIGNED,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
         estado: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         },
         kit: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         },
         barcode: {

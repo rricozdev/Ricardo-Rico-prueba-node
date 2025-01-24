@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("Producto_Stock", {
         id: {
-            type: DataTypes.MEDIUMINT.UNSIGNED,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         id_tienda: {
-            type: DataTypes.SMALLINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         },
         id_producto: {
-            type: DataTypes.INTEGER.UNSIGNED,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         fecha_ingreso: {

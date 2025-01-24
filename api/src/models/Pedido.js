@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("Pedido", {
         id: {
-            type: DataTypes.MEDIUMINT.UNSIGNED,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         valor_cupon: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         },
         valor_impuestos: {
@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         }, 
         id_tienda: {
-            type: DataTypes.SMALLINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         },
         direccion: {
@@ -52,11 +52,11 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         valor_comision: {
-            type: DataTypes.MEDIUMINT.UNSIGNED,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         id_user: {
-            type: DataTypes.MEDIUMINT.UNSIGNED,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         created_at: {

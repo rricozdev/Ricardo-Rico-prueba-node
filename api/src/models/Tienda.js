@@ -3,12 +3,12 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("Tienda", {
         id: {
-            type: DataTypes.SMALLINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             autoIncrement: true,
             primaryKey: true,
         },
         estado: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         },
         nombre: {
@@ -40,11 +40,11 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         calificacion_cantidad: {
-            type: DataTypes.MEDIUMINT.UNSIGNED,
+            type: DataTypes.INTEGER,
             allowNull: true,
         },
         impuestos: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: true,
         },
         dias_trabajados: {

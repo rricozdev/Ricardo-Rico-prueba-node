@@ -4,12 +4,12 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("Categoria", {
         id: {
-            type: DataTypes.SMALLINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             autoIncrement: true,
             primaryKey: true,
         },
         estado: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull: false,
         }, 
         nombre: {
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         impuestos: {
-            type: DataTypes.TINYINT.UNSIGNED,
+            type: DataTypes.SMALLINT,
             allowNull:true,
         },
         dias_trabajados: {
