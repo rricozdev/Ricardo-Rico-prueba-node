@@ -1,14 +1,17 @@
-const { Router } = require("express");
+const { Router } = require("express"); // Impportamos el enrutador de express
+const { createProductoHandler, getAllProductosHandler } = require("../handlers/productosHandler");
+const validateProducto = require("../middlewares/validateProducto");
 
-const routerProductos = Router();
+const routerProductos = Router(); // Creamos una instancia del enrutador para productos
 
 // CRUD
 
-// Get  - 
-routerProductos.get("/productos" , (req, res) => {
-    console.log("creando rutas");
-    res.status(200).send("creando rutas...")
-    
-} )
+// Post - Ruta para crear productos.
+routerProductos.post("/productos",validateProducto, createProductoHandler);
 
+// Get  - Ruta para obtener productos.
+routerProductos.get("/productos" , getAllProductosHandler);
+
+
+// Exportamos el enrutador para usarlo en el enrutador principal o en otros módulos.
 module.exports = routerProductos;
