@@ -1,12 +1,9 @@
 const { Router } = require("express");
+const routerProductos = require("./routerProductos");
 
 const mainRouter = Router();
 
 
-mainRouter.use("/", (req, res) => {
-    console.log("creando rutas");
-    res.status(200).send("creando rutas")
-    
-})
+mainRouter.use("/api", routerProductos)
 
 module.exports = mainRouter;
