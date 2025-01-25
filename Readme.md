@@ -1,5 +1,5 @@
 # Ricardo Rico Prueba Node
-![alt text](image-1.png)
+![alt text](./api/image-1.png)
 
 Este proyecto es una API  desarrollada en Node.js con Express y Sequelize, conectada a una base de datos PostgreSQL. La API permite gestionar productos, categorías, promociones y pedidos, entre otras funcionalidades.
 
