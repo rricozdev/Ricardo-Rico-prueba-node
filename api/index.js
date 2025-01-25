@@ -1,34 +1,39 @@
 const app = require("./src/app");
-const { conn, Producto } = require("./src/db");
-const productData = require("./productData");
+const { conn } = require("./src/db");
+const seedTiendas = require("./src/seeds/seedTiendas");
+const seedCategories = require("./src/seeds/seedCategories");
+const seedProducts = require("./src/seeds/seedProducts");
+const seedProductoCategoria = require("./src/seeds/seedProductoCategoria");
+const seedPedidos = require("./src/seeds/seedPedidos");
+const seedPedidoProductos = require("./src/seeds/seedPedidoProductos");
+const seedProductoStocks = require("./src/seeds/seedProductoStocks");
+const seedPromociones = require("./src/seeds/seedPromociones");
+const seedTiendaPromociones =require("./src/seeds/seedTiendaPromociones");
 
 const PORT = process.env.PORT ?? 3002;
 
-conn.sync({ force: false }).then(() => {
-  console.log("synchronized database");
+conn.sync({alter: true}).then(async () => {
+  console.log("Synchronized database");
 
-  Producto.count().then((count) => {
-    if (count === 0) {
-      Producto.bulkCreate(productData).then(() => {
-        console.log("20 products created succesfully");
-       
-      }).catch((err) => {
-        console.error("Error creating products:", err);
-      });
-    } else {
-      console.log("Products already exist in the database. Skipping seeding");
-      
-    }
-     // Colocamos servidor a escuchar
-     app.listen(PORT, () => {
-      console.log(`server listening on http://localhost:${PORT}`);
-    });
-  }).catch((err) => {
-    console.error("Error checking product count:", err);
-  });
+  await seedTiendas();
+  await seedCategories();
+  await seedProducts();
+  await seedProductoCategoria();
+  await seedPedidos();
+  await seedPedidoProductos();
+  await seedProductoStocks();
+  await seedPromociones();
+  await seedTiendaPromociones();
+
+  app.listen(PORT, () => {
+    console.log(`Server listening on http://localhos:${PORT}`);    
+  });  
+}).catch((err) => {
+  console.error("Error syncing database:", err);
 });
 
-// Manejo de errores
+
 app.use((err, req, res, next) => {
-  res.status(500).send("Internal server error");
+
+  res.status(500).send("Internal server error.");
 });
