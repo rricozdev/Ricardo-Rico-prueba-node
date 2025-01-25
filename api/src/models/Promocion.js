@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
     }, {
+        tableName: "Promocions",
         timestamps: false,
     })
 }

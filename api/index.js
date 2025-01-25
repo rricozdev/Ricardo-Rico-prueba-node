@@ -12,7 +12,7 @@ const seedTiendaPromociones =require("./src/seeds/seedTiendaPromociones");
 
 const PORT = process.env.PORT ?? 3002;
 
-conn.sync({alter: true}).then(async () => {
+conn.sync({force: false}).then(async () => {
   console.log("Synchronized database");
 
   await seedTiendas();
@@ -26,7 +26,7 @@ conn.sync({alter: true}).then(async () => {
   await seedTiendaPromociones();
 
   app.listen(PORT, () => {
-    console.log(`Server listening on http://localhos:${PORT}`);    
+    console.log(`Server listening on http://localhost:${PORT}`);    
   });  
 }).catch((err) => {
   console.error("Error syncing database:", err);

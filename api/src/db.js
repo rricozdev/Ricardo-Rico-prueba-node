@@ -43,26 +43,47 @@ const {
 } = sequelize.models;
 
 // Definir relaciones
-
 // Relación entre Producto y Categoría (N:M)
-Producto.belongsToMany(Categoria, { through: "Producto_Categoria", foreignKey: "id_producto", otherKey: "id_categoria"});
-Categoria.belongsToMany(Producto, { through: "Producto_Categoria", foreignKey: "id_categoria", otherKey: "id_producto"})
+Producto.belongsToMany(Categoria, {
+  through: "Producto_Categoria",
+  foreignKey: "id_producto",
+  otherKey: "id_categoria",
+});
+Categoria.belongsToMany(Producto, {
+  through: "Producto_Categoria",
+  foreignKey: "id_categoria",
+  otherKey: "id_producto",
+});
 
 // Relación entre Producto y Producto_Stock (1:N)
 Producto.hasMany(Producto_Stock, { foreignKey: "id_producto" });
 Producto_Stock.belongsTo(Producto, { foreignKey: "id_producto" });
 
 // Relación entre Pedido y Pedido_Producto (1:N)
-Pedido.hasMany(Pedido_Producto, { foreignKey: "id_pedido" }); 
-Pedido_Producto.belongsTo(Pedido, { foreignKey: "id_pedido" }); 
+Pedido.hasMany(Pedido_Producto, { foreignKey: "id_pedido" });
+Pedido_Producto.belongsTo(Pedido, { foreignKey: "id_pedido" });
 
 // Relación entre Producto y Pedido_Producto (1:N)
 Producto.hasMany(Pedido_Producto, { foreignKey: "id_producto" });
-Pedido_Producto.belongsTo(Producto, { foreignKey: "id_producto" }); 
+Pedido_Producto.belongsTo(Producto, { foreignKey: "id_producto" });
 
 // Relación entre Promoción y Tienda (N:M)
-Promocion.belongsToMany(Tienda, { through: Tienda_Promocion });
-Tienda.belongsToMany(Promocion, { through: Tienda_Promocion });
+Promocion.belongsToMany(Tienda, {
+  through: Tienda_Promocion,
+  foreignKey: "id_promocion", // Clave foránea en Tienda_Promocion
+});
+Tienda.belongsToMany(Promocion, {
+  through: Tienda_Promocion,
+  foreignKey: "id_tienda", // Clave foránea en Tienda_Promocion
+});
+
+// Relación entre Tienda_Promocion y Tienda
+Tienda_Promocion.belongsTo(Tienda, { foreignKey: "id_tienda" });
+Tienda.hasMany(Tienda_Promocion, { foreignKey: "id_tienda" });
+
+// Relación entre Tienda_Promocion y Promocion
+Tienda_Promocion.belongsTo(Promocion, { foreignKey: "id_promocion" });
+Promocion.hasMany(Tienda_Promocion, { foreignKey: "id_promocion" });
 
 // Relación entre Producto_Stock y Tienda (N:1)
 Producto_Stock.belongsTo(Tienda, { foreignKey: "id_tienda" });
