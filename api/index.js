@@ -7,14 +7,24 @@ const PORT = process.env.PORT ?? 3002;
 conn.sync({ force: false }).then(() => {
   console.log("synchronized database");
 
-  Producto.bulkCreate(productData).then(() => {
-    console.log("20 products created succesfully");
-    // Colocamos servidor a escuchar
-    app.listen(PORT, () => {
+  Producto.count().then((count) => {
+    if (count === 0) {
+      Producto.bulkCreate(productData).then(() => {
+        console.log("20 products created succesfully");
+       
+      }).catch((err) => {
+        console.error("Error creating products:", err);
+      });
+    } else {
+      console.log("Products already exist in the database. Skipping seeding");
+      
+    }
+     // Colocamos servidor a escuchar
+     app.listen(PORT, () => {
       console.log(`server listening on http://localhost:${PORT}`);
     });
   }).catch((err) => {
-    console.error("Error creating products:", err);
+    console.error("Error checking product count:", err);
   });
 });
 

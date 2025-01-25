@@ -53,12 +53,12 @@ Producto.hasMany(Producto_Stock, { foreignKey: "id_producto" });
 Producto_Stock.belongsTo(Producto, { foreignKey: "id_producto" });
 
 // Relación entre Pedido y Pedido_Producto (1:N)
-Pedido.hasMany(Pedido_Producto, { foreignKey: "id_pedido" }); // Corregido: usar id_pedido
-Pedido_Producto.belongsTo(Pedido, { foreignKey: "id_pedido" }); // Corregido: usar id_pedido
+Pedido.hasMany(Pedido_Producto, { foreignKey: "id_pedido" }); 
+Pedido_Producto.belongsTo(Pedido, { foreignKey: "id_pedido" }); 
 
 // Relación entre Producto y Pedido_Producto (1:N)
-Producto.hasMany(Pedido_Producto, { foreignKey: "id_producto" }); // Corregido: usar id_producto
-Pedido_Producto.belongsTo(Producto, { foreignKey: "id_producto" }); // Corregido: usar id_producto
+Producto.hasMany(Pedido_Producto, { foreignKey: "id_producto" });
+Pedido_Producto.belongsTo(Producto, { foreignKey: "id_producto" }); 
 
 // Relación entre Promoción y Tienda (N:M)
 Promocion.belongsToMany(Tienda, { through: Tienda_Promocion });
