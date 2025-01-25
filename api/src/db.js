@@ -45,8 +45,8 @@ const {
 // Definir relaciones
 
 // Relación entre Producto y Categoría (N:M)
-Producto.belongsToMany(Categoria, { through: Producto_Categoria });
-Categoria.belongsToMany(Producto, { through: Producto_Categoria });
+Producto.belongsToMany(Categoria, { through: "Producto_Categoria", foreignKey: "id_producto", otherKey: "id_categoria"});
+Categoria.belongsToMany(Producto, { through: "Producto_Categoria", foreignKey: "id_categoria", otherKey: "id_producto"})
 
 // Relación entre Producto y Producto_Stock (1:N)
 Producto.hasMany(Producto_Stock, { foreignKey: "id_producto" });
