@@ -10,12 +10,21 @@ module.exports = (sequelize) => {
         id_categoria: {
             type: DataTypes.SMALLINT,
             allowNull: false,
+            references: {
+                model: "Categoria",
+                key: "id"
+            }
         },
         id_producto: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: "Productos",
+                key: "id",
+            }
         },
     },{
+        tableName: "Producto_Categoria",
         timestamps: false,
     })
 }
