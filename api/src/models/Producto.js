@@ -36,6 +36,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
     },{
+        tableName: "Productos",
         timestamps: false,
     })
 }
