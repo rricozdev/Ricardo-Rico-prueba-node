@@ -1,6 +1,7 @@
 const {
   createProducto,
   getAllProductos,
+  getProductosMasVendidos,
 } = require("../controllers/productosController");
 
 // Post - función que solicita crear un producto
@@ -33,7 +34,21 @@ const getAllProductosHandler = async (req, res) => {
   }
 };
 
+// Get - función que solicita obtner un listado de los 10 productos mas vendidos
+const getProductosMasVendidosHandler = async (req, res) => {
+  try {
+    const productosMasVendidos = await getProductosMasVendidos();
+    res.status(200).json({
+      message: "Consultado correctamente",
+      data: productosMasVendidos,
+    })
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  };
+};
+
 module.exports = {
   createProductoHandler,
   getAllProductosHandler,
+  getProductosMasVendidosHandler
 };
