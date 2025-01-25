@@ -1,4 +1,11 @@
-const { Producto, Producto_Stock, Tienda } = require("../db");
+const {
+  Producto,
+  Producto_Stock,
+  Tienda,
+  Pedido_Producto,
+} = require("../db");
+
+const { conn } = require("../db")
 
 // Post - función que nos permite crear un producto
 const createProducto = async (
@@ -72,7 +79,42 @@ const getAllProductos = async () => {
   }
 };
 
+// Get - Función para sumar las cantidadaes vendidas de cada producto
+const getProductosMasVendidos = async () => {
+  const productosMasVendidos = await Pedido_Producto.findAll({
+    attributes: [
+      "id_producto",
+      [conn.fn("SUM", conn.col("cantidad")), "total_vendido"],
+    ],
+    group: ["id_producto", "Producto.id"],
+    order: [[conn.literal("total_vendido"), "DESC"]], // Ordenamos por unidades vendidas en orden descendente.
+    limit: 10,
+    include: [
+      {
+        model: Producto,
+        attributes: ["nombre", "presentacion"],
+      },
+    ],
+  });
+
+  console.log(
+    "productosMasVendidos:",
+    JSON.stringify(productosMasVendidos, null, 2) // Formatea el JSON con una sangría de 2 espacios.
+  );
+  
+
+  const formattedProductos = productosMasVendidos.map((item) => ({
+    idProducto: item.id_producto,
+    nombre: item.Producto ? item.Producto.nombre : "nombre no disponible",
+    presentacion: item.Producto ? item.Producto.presentacion : "presentacion no disponible",
+    unidadesVendidas: item.dataValues.total_vendido,
+  }));
+
+  return formattedProductos;
+};
+
 module.exports = {
   createProducto,
   getAllProductos,
+  getProductosMasVendidos,
 };
