@@ -1,11 +1,6 @@
-const {
-  Producto,
-  Producto_Stock,
-  Tienda,
-  Pedido_Producto,
-} = require("../db");
+const { Producto, Producto_Stock, Tienda, Pedido_Producto } = require("../db");
 
-const { conn } = require("../db")
+const { conn } = require("../db");
 
 // Post - función que nos permite crear un producto
 const createProducto = async (
@@ -101,12 +96,13 @@ const getProductosMasVendidos = async () => {
     "productosMasVendidos:",
     JSON.stringify(productosMasVendidos, null, 2) // Formatea el JSON con una sangría de 2 espacios.
   );
-  
 
   const formattedProductos = productosMasVendidos.map((item) => ({
     idProducto: item.id_producto,
     nombre: item.Producto ? item.Producto.nombre : "nombre no disponible",
-    presentacion: item.Producto ? item.Producto.presentacion : "presentacion no disponible",
+    presentacion: item.Producto
+      ? item.Producto.presentacion
+      : "presentacion no disponible",
     unidadesVendidas: item.dataValues.total_vendido,
   }));
 
