@@ -4,6 +4,7 @@ const routerProductos = require("./routerProductos");
 
 // Importamos el enrutador específico para tiendas
 const routerTiendas = require("./routerTiendas");
+const routerCategorias = require("./routerCategorias");
 
 const mainRouter = Router(); // Creamos ua instancia del enrutador principal.
 
@@ -12,6 +13,9 @@ mainRouter.use("/api/productos", routerProductos);
 
 // ruta tiendas
 mainRouter.use("/api/tiendas", routerTiendas);
+
+// ruta categorias
+mainRouter.use("/api/categorias", routerCategorias);
 
 
 // Exportamos el enrutador principal para que sea utilizado en otros arhivos.
